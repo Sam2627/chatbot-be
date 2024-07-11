@@ -9,14 +9,6 @@ from clean_text import clean_text, replace_accents
 from predict_ml import predict_input
 from train_ml import train_ml
 
-# load_terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
-# load_model = load_model = tf.keras.models.load_model('LearnML/model.keras')
-
-# Load terms and model funtion
-# def load_terms_model():
-#     load_terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
-#     load_model = tf.keras.models.load_model('LearnML/model.keras')
-
 app = FastAPI(
     title="Machine Learing API",
     description="ML model for answer common question",

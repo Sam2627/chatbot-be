@@ -10,14 +10,10 @@ import pickle
 from ast import literal_eval
 
 # from main import load_terms, load_model
-import setting_be
 from setting_be import num_labels, st_max_seqlen, st_batch_size
 
-# # Load labels
-# lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
-
-# terms = load_terms
-# model_for_inference = load_model
+terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
+model_for_inference = tf.keras.models.load_model('LearnML/model.keras')
 
 # Dataset parameter
 max_seqlen = st_max_seqlen
@@ -41,12 +37,12 @@ def predict_input(input_text) -> list[str]:
 
     # Load terms
     lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
-    terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
+    # terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
     # terms = setting_be.load_terms
     lookup.adapt(terms)
 
     # Load models
-    model_for_inference = tf.keras.models.load_model('LearnML/model.keras')
+    # model_for_inference = tf.keras.models.load_model('LearnML/model.keras')
     # model_for_inference = setting_be.load_model
 
     def make_dataset(dataframe, is_train=True):

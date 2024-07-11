@@ -13,7 +13,6 @@ from tensorflow import keras
 
 # Get other lib
 # from main import load_terms_model
-import setting_be
 from setting_be import sqlconn, st_max_seqlen, st_batch_size, st_epochs
 from clean_text import clean_text
 
@@ -58,8 +57,8 @@ def train_ml():
     lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
     lookup.adapt(terms)
     
-    max_seqlen = 6
-    batch_size = 10
+    max_seqlen = st_max_seqlen
+    batch_size = st_batch_size
     padding_token = "<pad>"
     auto = tf.data.AUTOTUNE
 
