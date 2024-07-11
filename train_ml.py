@@ -53,7 +53,7 @@ def train_ml():
     )
 
     # Preprocess labels using the StringLookup layer
-    terms = tf.ragged.constant(train_df['MaCauHoi'].values)
+    terms = tf.ragged.constant(data_filtered['MaCauHoi'].values)
     lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
     lookup.adapt(terms)
     
@@ -108,7 +108,7 @@ def train_ml():
     epochs = st_epochs
     shallow_mlp_model.fit(train_dataset, validation_data=validation_dataset, epochs=epochs)
     # Add layer for accept raw string and create model for inference
-    model_for_inference = tf.keras.Sequential([text_vectorizer, shallow_mlp_model])
+    model_for_inference = keras.Sequential([text_vectorizer, shallow_mlp_model])
 
     # Export terms
     pickle.dump(terms, open('LearnML/terms.pkl','wb'))

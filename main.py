@@ -1,5 +1,5 @@
-# Run server in bash cmd: uvicorn runserver:app --reload 
-# Add /docs#/ after url for Swagger UI API
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -38,30 +38,30 @@ def start():
 
 # Call train model
 @app.get("/train")
-async def root():
+async def train():
     train_ml()
     return "Ok training complete."
 
 # Return input text
 @app.post("/text")
-def post_text(txt: str) -> str:
+def return_text(txt: str) -> str:
     return txt
 
 # Return clean input text
 @app.post("/text_clean")
-def post_text(txt: str) -> str:
+def clean_text(txt: str) -> str:
     txt = clean_text(txt)
     return txt
 
 # Return input text with convert accents
 @app.post("/text_accents")
-def post_text(txt: str) -> str:
+def accents_text(txt: str) -> str:
     txt = replace_accents(txt)
     return txt
 
 # Use ML return list labels from input text
 @app.post("/text_ml", status_code=200)
-def post_text(txt: TextInput) -> list[str]:
+def ml_text(txt: TextInput) -> list[str]:
     get_txt = getattr(txt, "text", "")
 
     # Get length of process input text and raise error if it too short
@@ -76,7 +76,7 @@ def post_text(txt: TextInput) -> list[str]:
 
 # Use check input lenght is valid
 @app.post("/len_text")
-def post_text(txt: TextInput) -> bool:
+def len_text(txt: TextInput) -> bool:
     get_txt = getattr(txt, "text", "")
     get_txt = clean_text(get_txt)
     # Find numbers of words in text
