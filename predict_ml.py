@@ -5,6 +5,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import pandas as pd
 import tensorflow as tf
 import pickle
+from tensorflow import keras
 
 # Process label in list str library
 from ast import literal_eval
@@ -13,7 +14,7 @@ from ast import literal_eval
 from setting_be import num_labels, st_max_seqlen, st_batch_size
 
 terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
-model_for_inference = tf.keras.models.load_model('LearnML/model.keras')
+model_for_inference = keras.models.load_model('LearnML/model.keras')
 
 # Dataset parameter
 max_seqlen = st_max_seqlen
@@ -91,7 +92,6 @@ def predict_input(input_text) -> list[str]:
     #txt_str = (','.join([label for label in top_labels]))
 
     return list_labels
-
 
 def load_terms_model():
     load_terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
