@@ -32,36 +32,36 @@ def root():
     return "Hello World."
 
 @app.get("/start")
-def start():
+async def root():
     start_sever()
     return "Retrain model completed"
 
 # Call train model
 @app.get("/train")
-async def train():
+async def root():
     train_ml()
     return "Ok training complete."
 
 # Return input text
 @app.post("/text")
-def return_text(txt: str) -> str:
+def post_text(txt: str) -> str:
     return txt
 
 # Return clean input text
 @app.post("/text_clean")
-def clean_text(txt: str) -> str:
+def post_text(txt: str) -> str:
     txt = clean_text(txt)
     return txt
 
 # Return input text with convert accents
 @app.post("/text_accents")
-def accents_text(txt: str) -> str:
+def post_text(txt: str) -> str:
     txt = replace_accents(txt)
     return txt
 
 # Use ML return list labels from input text
 @app.post("/text_ml", status_code=200)
-def ml_text(txt: TextInput) -> list[str]:
+def post_text(txt: TextInput) -> list[str]:
     get_txt = getattr(txt, "text", "")
 
     # Get length of process input text and raise error if it too short
@@ -76,7 +76,7 @@ def ml_text(txt: TextInput) -> list[str]:
 
 # Use check input lenght is valid
 @app.post("/len_text")
-def len_text(txt: TextInput) -> bool:
+def post_text(txt: TextInput) -> bool:
     get_txt = getattr(txt, "text", "")
     get_txt = clean_text(get_txt)
     # Find numbers of words in text
