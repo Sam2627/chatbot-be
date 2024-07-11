@@ -32,10 +32,9 @@ app.use('/api', cauhoiMLupRouter);
 app.use('/api', dangKy);
 
 // Define host and port
-  const host = '127.0.0.1';  // Thay đổi cái này theo ipv4 của máy
-  const port = process.env.PORT || 3000;
-  
-  app.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
-  });
-  
+const host = '127.0.0.1';  // Thay đổi cái này theo ipv4 của máy
+const port = process.env.PORT || 4500;
+
+app.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
+});
