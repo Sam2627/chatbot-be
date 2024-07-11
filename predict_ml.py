@@ -95,3 +95,8 @@ def predict_input(input_text) -> list[str]:
     #txt_str = (','.join([label for label in top_labels]))
 
     return list_labels
+
+
+def load_terms_model():
+    load_terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
+    load_model = tf.keras.models.load_model('LearnML/model.keras')
