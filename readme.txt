@@ -20,6 +20,7 @@ Add /docs#/ after url for Swagger UI API
 # 2 - Run PY-BE in Debian
 - Enter venv: source pyenv/bin/activate
 - python -m uvicorn main:app --reload --port 5000
+- Retrain model bcs Text Vectorization layer not have weights
 - curl -X 'GET' \
   'http://127.0.0.1:5000/start' \
   -H 'accept: application/json'
