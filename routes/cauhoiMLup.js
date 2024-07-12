@@ -67,7 +67,7 @@ router.post('/cauhoiMLUp', async (req, res) => {
     executeQuery(insertQuery, [maCauHoiJson, CauHoi]);
 
     // Step 6: Call the Python API to train the model
-    await axios.get('http://localhost:8000/train');
+    await axios.get('http://localhost:5000/train');
 
     res.status(200).json({ message: "Latest question added and model training started successfully" });
   } catch (error) {

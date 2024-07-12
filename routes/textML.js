@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const db = require('../db'); // Import the shared database connection
+const db = require('../db');
 
 // Function to execute a query
 function executeQuery(query, params) {
@@ -24,7 +24,7 @@ router.post('/processTextML', async (req, res) => {
       response = await axios.post('http://localhost:5000/text_ml', { text, is_txt: true });
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        return res.status(400).json({ error: "Câu hỏi quá ngắn hoặc dài! Vui lòng nhập lại." });
+        return res.status(400).json({ error: "Câu hỏi quá ngắn! Vui lòng nhập lại." });
       }
       throw error;
     }

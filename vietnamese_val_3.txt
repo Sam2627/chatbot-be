@@ -226,3 +226,7 @@ khoa-y-tế-công-cộng
 nghiên-cứu-khoa-học-quan-hệ-đối-ngoại
 phone
 nghiên-cứu-khoa-học
+xin-chào
+chào
+hi
+hello

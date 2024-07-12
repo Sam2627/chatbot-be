@@ -12,6 +12,7 @@ from ast import literal_eval
 
 # from main import load_terms, load_model
 from setting_be import num_labels, st_max_seqlen, st_batch_size
+# from setting_be import load_terms, load_model
 
 # terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
 # model_for_inference = keras.models.load_model('LearnML/model.keras')
