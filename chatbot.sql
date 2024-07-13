@@ -304,7 +304,8 @@ Trong năm 2023, Trường khánh thành đưa vào sử dụng nhà xe ô tô-m
 ('VB162', 'Chưa có dữ liệu', 'D17'),
 ('VB163', 'Địa chỉ: Tầng 1, Khu Nhà tròn tòa nhà Khoa Dược - Răng Hàm Mặt, Trường Đại học Y Dược Cần Thơ', 'D17'),
 ('VB164', 'Điện thoại: 0292. 3898422', 'D17'),
-('VB165', 'Email: qlda@ctump.edu.vn', 'D17');
+('VB165', 'Email: qlda@ctump.edu.vn', 'D17'),
+('VB166', 'Xin chào, tôi có thế giúp gì ?', 'D11');
 
 
 -- Thêm dữ liệu câu hỏi
@@ -473,8 +474,8 @@ INSERT INTO CauHoi (MaCauHoi, CauHoi, MaDonVi, MaChuDe, MaVanBan, CoThayDoi) VAL
 ('C162', 'Phó Phòng Quản lý dự án của Đại Học Y Dược Cần Thơ', 'D17', 'cán-bộ', 'VB162', TRUE),
 ('C163', 'Vị trí của phòng Quản lý dự án', 'D17', 'chung', 'VB163', FALSE),
 ('C164', 'Số điện thoại của phòng Quản lý dự án', 'D17', 'chung', 'VB164', FALSE),
-('C165', 'Email của phòng Quản lý dự án', 'D17', 'chung', 'VB165', FALSE);
-
+('C165', 'Email của phòng Quản lý dự án', 'D17', 'chung', 'VB165', FALSE),
+('C166', 'Xin chào', 'D11', 'chung', 'VB166', FALSE);
 
 -- Thêm dữ liệu câu hỏi cho máy học
 INSERT INTO CauHoiML (MaCauHoi, CauHoi) VALUES
@@ -1013,9 +1014,8 @@ INSERT INTO CauHoiML (MaCauHoi, CauHoi) VALUES
 ('["C164"]', 'Phòng Quản lý dự án có số điện thoại là mấy ?'),
 ('["C165"]', 'Email của phòng Quản lý dự án'),
 ('["C165"]', 'Địa chỉ email của Phòng Quản lý dự án của Trường Đại Học Y Dược Cần Thơ là ?'),
-('["C165"]', 'Phòng Quản lý dự án có email là gì ?');
-
-
-
-
-
+('["C165"]', 'Phòng Quản lý dự án có email là gì ?'),
+('["C166"]', 'Xin chào'),
+('["C166"]', 'Hi'),
+('["C166"]', 'Hello'),
+('["C166"]', 'Chào bạn');

@@ -25,6 +25,10 @@ Add /docs#/ after url for Swagger UI API
   'http://127.0.0.1:5000/start' \
   -H 'accept: application/json'
 
+  curl -X 'GET' \
+  'http://127.0.0.1:5000/' \
+  -H 'accept: application/json'
+
 # 3 - Run Node.js server
 - Remove modules from window env: rm -rf node_modules/
 - Install Node modules of linux: npm update

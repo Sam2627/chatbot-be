@@ -13,7 +13,8 @@ from tensorflow import keras
 
 # Get other lib
 # from main import load_terms_model
-from setting_be import sqlconn, st_max_seqlen, st_batch_size, st_epochs
+from setting_py import sqlconn, st_max_seqlen, st_batch_size, st_epochs
+from setting_py import load_terms_model
 from clean_text import clean_text
 
 # Dataset parameter
@@ -115,4 +116,4 @@ def train_ml():
     # Export model
     model_for_inference.save('LearnML/model.keras', save_format="keras")   
 
-    # setting_be.load_terms_model()
+    load_terms_model()

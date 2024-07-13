@@ -1,36 +1,17 @@
 require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
 const db = require('./db');
 const app = express();
 
 // Middleware setup
 app.use(cors({
-    origin: 'http://127.0.0.1:5501',
+    origin: '*',
     SameSite: 'Lax',
     credentials: true,
 }));
 
 app.use(express.json());
-
-const secretKey = process.env.JWT_SECRET_KEY;
-
-// Middleware to verify JWT tokens
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (!token) {
-        return res.sendStatus(401);
-    }
-    jwt.verify(token, secretKey, (err, user) => {
-        if (err) {
-            return res.sendStatus(403);
-        }
-        req.user = user;
-        next();
-    });
-}
 
 // Importing and setting up routes
 const donViRouter = require("./routes/donVi");
@@ -57,8 +38,10 @@ app.use('/api', dangKyRouter);
 app.use('/api', dangNhapRouter);
 
 // Server setup
-const port = process.env.PORT || 4500;
-const internalIp = process.env.INTERNAL_IP || '192.168.2.22';
+const port = process.env.PORT || 3000;
+// const ipAddress = process.env.ipAddress || '10.1.80.45';
+
+const internalIp = process.env.INTERNAL_IP || 'localhost';
 const ipAddress = internalIp || '127.0.0.1';
 
 app.listen(port, ipAddress, () => {

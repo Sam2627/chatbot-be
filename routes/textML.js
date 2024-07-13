@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const db = require('../db');
+const db = require('../db'); 
 
 // Function to execute a query
 function executeQuery(query, params) {
@@ -21,7 +21,7 @@ router.post('/processTextML', async (req, res) => {
     // Step 1: Call the text_ml endpoint
     let response;
     try {
-      response = await axios.post('http://localhost:5000/text_ml', { text, is_txt: true });
+      response = await axios.post('http://localhost:8000/text_ml', { text, is_txt: true });
     } catch (error) {
       if (error.response && error.response.status === 400) {
         return res.status(400).json({ error: "Câu hỏi quá ngắn! Vui lòng nhập lại." });
@@ -33,7 +33,7 @@ router.post('/processTextML', async (req, res) => {
       throw new Error('ML API returned an empty list');
     }
 
-    let stringList = response.data;
+    let stringList = response.data.slice(0, 10);
     const firstString = stringList.shift();
 
     // Step 3: Get MaVanBan and MaChuDe from the first string
@@ -62,13 +62,13 @@ router.post('/processTextML', async (req, res) => {
 
     // Step 4: Filter stringList based on MaChuDe and remove duplicates
     const filteredListQuery = `
-      SELECT CauHoi FROM CauHoi WHERE MaChuDe = ? AND MaCauHoi != ?
+      SELECT CauHoi FROM CauHoi WHERE MaChuDe = ? AND MaCauHoi IN (${stringList.map(() => '?').join(', ')}) AND MaCauHoi != ?
     `;
-    const filteredListResult = executeQuery(filteredListQuery, [MaChuDe, firstString]);
+    const filteredListResult = executeQuery(filteredListQuery, [MaChuDe, ...stringList, firstString]);
 
-    const filteredList = filteredListResult.map(result => result.CauHoi);
+    const suggestions = filteredListResult.slice(0, 5).map(result => result.CauHoi);
 
-    res.status(200).json({ CauTraLoi: cauTraLoi, Suggestions: [...new Set(filteredList)] }); // Remove duplicates using Set
+    res.status(200).json({ CauTraLoi: cauTraLoi, Suggestions: [...new Set(suggestions)] });
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).json({ error: error.message });
@@ -79,7 +79,7 @@ router.post('/processTextML', async (req, res) => {
 router.get('/train', async (req, res) => {
   try {
     // Call the Python API to train the model
-    const response = await axios.get('http://localhost:5000/train');
+    const response = await axios.get('http://localhost:8000/train');
     res.status(200).json({ message: "Training complete", data: response.data });
   } catch (error) {
     console.error('Error:', error.message);
